@@ -6,7 +6,7 @@ const config = require('./config');
 // Express
 const express = require('express');
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 
 // Start listening for connections
 console.log("Listening on port " + port + "...");
@@ -16,7 +16,7 @@ app.listen(port);
 const mongoose = require('mongoose');
 
 // Actually connect to the database (lets use a promise)
-mongoose.connect(config.getDbConnectionString(),{ useNewUrlParser: true }).then(()=> {
+mongoose.connect(config.getDbConnectionString(), {useNewUrlParser: true}).then(() => {
         console.log("Successfully connected to the database.");
     },
     err => {
@@ -26,3 +26,7 @@ mongoose.connect(config.getDbConnectionString(),{ useNewUrlParser: true }).then(
 );
 const setupController = require('./Controllers/setupController');
 setupController(app);
+
+const apiController = require('./Controllers/apiController');
+apiController(app);
+

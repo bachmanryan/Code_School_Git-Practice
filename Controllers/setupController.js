@@ -2,7 +2,7 @@ const Todos = require('../models/todoModel.js');
 
 module.exports = function (app) {
 
-    app.get('/api/setupTodos', function (req,res) {
+    app.get('/api/setupTodos', function (req, res) {
 
         const starterTodos = [
             {
@@ -22,7 +22,7 @@ module.exports = function (app) {
             }
 
         ];
-        Todos.create(starterTodos, function (err,results) {
+        Todos.create(starterTodos, function (err, results) {
             res.send(results);
 
         })

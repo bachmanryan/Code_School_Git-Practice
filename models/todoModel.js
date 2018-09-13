@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const todoSchema = new Schema(
     {
-        username:String,
+        username: String,
         todo: String,
         isDone: Boolean
     }
