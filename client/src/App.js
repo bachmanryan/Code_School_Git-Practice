@@ -14,17 +14,17 @@ class App extends Component {
           {
               username: "Ryan",
               todo: "Clean room",
-              isDone: false
+              isDone: "is done"
           },
           {
               username: "Ryan",
               todo: "Dishes",
-              isDone: false
+              isDone: "is not done"
           },
           {
               username: "Ryan",
               todo: "Garbage",
-              isDone: false
+              isDone: "is done"
           }
       ];
 
