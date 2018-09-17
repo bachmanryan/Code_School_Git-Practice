@@ -1,6 +1,6 @@
 const Todos = require("../models/todoModel.js");
-
 const bodyParser = require('body-parser');
+const moment = require('moment');
 
 
 module.exports = function (app) {
@@ -8,8 +8,41 @@ module.exports = function (app) {
     app.use(bodyParser.urlencoded({extended: true}));
     app.use(bodyParser.json());
 
+
+    app.get('/api/todo/all/open/:numdays', function (req, res) {
+        let ageDays = req.params.numdays;
+        console.log('Checking for Todos older than ${ageDays} days.')
+        var cutoff = moment().subtract(ageDays, "days")
+        console.log(cutoff);
+
+        Todos.find({$and: [{dueDate: {$lte: cutoff}}, {isDone: false}]}, function (err, todos) {
+            if (err){
+                throw err;
+            }
+            res.send(todos);
+
+        })
+    };
+
+
+
+
+
+
+
+    // Get all open ToDos
+    app.get('/api/todo/all/open', function (req, res) {
+        Todos.find({isDone: false }, function (err, todos) {
+            if (err) {
+                throw err;
+            }
+            //We got results
+            res.send(todos);
+        })
+    });
+
     //Implement routes for the API
-    app.get('/api/todos/:username', function (req, res) {
+    app.get('/api/todo/:username', function (req, res) {
 
         Todos.find({username: req.params.username}, function (err, todos) {
 
@@ -72,7 +105,7 @@ module.exports = function (app) {
 // ROUTE: DELETE an existing todo item by its ID
     app.delete('/api/todo', function (req, res) {
 
-        Todos.findOneAndDelete(req.body.id, function (err) {
+        Todos.findByIdAndRemove(req.body.id, function (err) {
             if (err) {
                 throw err; // If we get an error then bail
             }

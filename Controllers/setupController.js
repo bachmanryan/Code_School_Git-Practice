@@ -1,4 +1,5 @@
 const Todos = require('../models/todoModel.js');
+const moment = require('moment');
 
 module.exports = function (app) {
 
@@ -8,17 +9,20 @@ module.exports = function (app) {
             {
                 username: 'rBachman',
                 todo: 'Get new teacher with better manners',
-                isDone: false
+                isDone: false,
+                dueDate: moment().subtract(10, 'days').calendar()
             },
             {
                 username: 'rBachman',
                 todo: 'get snacks',
-                isDone: false
+                isDone: false,
+                dueDate: moment().subtract(4, 'days').calendar()
             },
             {
                 username: 'rBachman',
                 todo: 'something else',
-                isDone: false
+                isDone: false,
+                dueDate: moment().subtract(, 'days').calendar()
             }
 
         ];
